@@ -89,3 +89,18 @@ SELECT IdEditorial, Nombre FROM Editorial
 CREATE PROCEDURE GeneroGetAll
 AS
 SELECT IdGenero, Nombre FROM Genero
+
+ALTER PROCEDURE [dbo].[LibroGeAll]
+AS
+SELECT IdLibro, Libro.Nombre, Libro.IdAutor, Autor.Nombre, NumeroPaginas, FechaPublicacion, Libro.IdEditorial, Editorial.Nombre, Edicion, Libro.IdGenero, Genero.IdGenero FROM Libro
+INNER JOIN Autor ON Libro.IdAutor = Autor.IdAutor 
+INNER JOIN Editorial ON Libro.IdEditorial = Editorial.IdEditorial
+INNER JOIN Genero ON Libro.IdGenero = Genero.IdGenero 
+
+ALTER PROCEDURE [dbo].[LibroGetById]
+@IdLibro INT
+AS
+SELECT IdLibro, Libro.Nombre, Libro.IdAutor, Autor.Nombre, NumeroPaginas, FechaPublicacion, Libro.IdEditorial, Editorial.Nombre, Edicion, Libro.IdGenero, Genero.IdGenero FROM Libro
+INNER JOIN Autor ON Libro.IdAutor = Autor.IdAutor 
+INNER JOIN Editorial ON Libro.IdEditorial = Editorial.IdEditorial
+INNER JOIN Genero ON Libro.IdGenero = Genero.IdGenero  WHERE Libro.IdLibro = @IdLibro
